@@ -1,180 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
+
 <head>
+
 <meta charset="UTF-8">
 <title>Distrito Futbolero</title>
-  
-<style>
 
-body{
-font-family:Arial;
-margin:0;
-background:#f2f2f2;
-}
+<link rel="stylesheet" href="styles.css">
 
-header{
-background:#111;
-color:white;
-text-align:center;
-padding:20px;
-}
-
-.catalogo{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:30px;
-}
-
-.producto{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-.producto img{
-width:100%;
-border-radius:8px;
-}
-
-.precio{
-font-size:20px;
-font-weight:bold;
-}
-
-.boton{
-display:inline-block;
-margin-top:10px;
-padding:10px 15px;
-background:#25D366;
-color:white;
-text-decoration:none;
-border-radius:5px;
-}
-
-</style>
 </head>
 
 <body>
 
 <header>
-<h1>Distrito Futbolero</h1>
-<p>Camisetas originales | Retro y actuales</p>
-<p>Envíos a todo México</p>
+⚽ Distrito Futbolero
 </header>
 
-<section class="catalogo">
-
-<style>
-
-body{
-font-family:Arial;
-background:#f2f2f2;
-margin:0;
-}
-
-header{
-background:#111;
-color:white;
-padding:20px;
-text-align:center;
-}
-
-.buscador{
-text-align:center;
-margin:20px;
-}
-
-.buscador input{
-padding:10px;
-width:300px;
-border-radius:5px;
-border:1px solid #ccc;
-}
-
-.filtros{
-text-align:center;
-margin-bottom:20px;
-}
-
-.catalogo{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.producto{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-.producto img{
-width:100%;
-border-radius:8px;
-}
-
-.precio{
-font-size:20px;
-font-weight:bold;
-}
-
-.boton{
-display:block;
-margin:6px;
-padding:10px;
-color:white;
-text-decoration:none;
-border-radius:6px;
-}
-
-.paypal{
-background:#0070ba;
-}
-
-.mercadopago{
-background:#009ee3;
-}
-
-.agotado{
-background:red;
-color:white;
-padding:8px;
-border-radius:6px;
-}
-
-</style>
-
-  <div class="buscador">
+<div class="buscador">
 
 <input type="text" id="buscar" placeholder="Buscar jugador o equipo">
 
 </div>
 
-  <script>
-
-document.getElementById("buscar").addEventListener("keyup",function(){
-
-let filtro=this.value.toLowerCase()
-
-document.querySelectorAll(".producto").forEach(producto=>{
-
-let texto=producto.innerText.toLowerCase()
-
-producto.style.display=texto.includes(filtro)?"block":"none"
-
-})
-
-})
-
-</script>
-
-  <div class="filtros">
+<div class="filtros">
 
 <select id="filtroTalla">
 
@@ -188,47 +36,10 @@ producto.style.display=texto.includes(filtro)?"block":"none"
 
 </div>
 
-  <script>
+<div class="catalogo" id="catalogo"></div>
 
-document.getElementById("filtroTalla").addEventListener("change",function(){
+<script src="script.js"></script>
 
-let talla=this.value
+</body>
 
-document.querySelectorAll(".producto").forEach(producto=>{
-
-if(talla=="todas"){
-
-producto.style.display="block"
-
-}else{
-
-producto.style.display=
-producto.dataset.talla==talla?"block":"none"
-
-}
-
-})
-
-})
-
-</script>
-
-  <script>
-
-function vendido(id){
-
-fetch("https://TU_BASE_FIREBASE/"+id+".json",{
-
-method:"PUT",
-
-body:JSON.stringify({
-
-vendido:true
-
-})
-
-})
-
-}
-
-</script>
+</html>
