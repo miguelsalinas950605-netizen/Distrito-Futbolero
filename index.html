@@ -4,6 +4,8 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Distrito Futbolero</title>
 
 <link rel="stylesheet" href="styles.css">
@@ -13,16 +15,21 @@
 <body>
 
 <header>
-⚽ Distrito Futbolero
-</header>
 
-<div class="buscador">
+<h1>⚽ Distrito Futbolero</h1>
 
-<input type="text" id="buscar" placeholder="Buscar jugador o equipo">
+<div class="carrito-icono">
+
+🛒 <span id="contador">0</span>
 
 </div>
 
-<div class="filtros">
+</header>
+
+
+<div class="controles">
+
+<input id="buscar" placeholder="Buscar jugador o equipo">
 
 <select id="filtroTalla">
 
@@ -36,7 +43,23 @@
 
 </div>
 
-<div class="catalogo" id="catalogo"></div>
+
+<div id="catalogo" class="catalogo"></div>
+
+
+<div class="carrito">
+
+<h2>Carrito</h2>
+
+<div id="listaCarrito"></div>
+
+<h3>Total: $<span id="total">0</span></h3>
+
+<button onclick="pagarPayPal()">Pagar con PayPal</button>
+
+<button onclick="pagarMP()">Pagar con MercadoPago</button>
+
+</div>
 
 <script src="script.js"></script>
 
@@ -48,7 +71,7 @@ body{
 
 font-family:Arial;
 margin:0;
-background:#f2f2f2;
+background:#f4f4f4;
 
 }
 
@@ -58,30 +81,36 @@ background:#111;
 color:white;
 padding:20px;
 text-align:center;
-font-size:28px;
+position:relative;
 
 }
 
-.buscador{
+.carrito-icono{
+
+position:absolute;
+right:20px;
+top:20px;
+font-size:20px;
+
+}
+
+.controles{
 
 text-align:center;
 margin:20px;
 
 }
 
-.buscador input{
+.controles input{
 
 padding:10px;
-width:300px;
-border-radius:6px;
-border:1px solid #ccc;
+width:250px;
 
 }
 
-.filtros{
+.controles select{
 
-text-align:center;
-margin-bottom:20px;
+padding:10px;
 
 }
 
@@ -99,7 +128,7 @@ padding:20px;
 background:white;
 padding:15px;
 border-radius:10px;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
+box-shadow:0 2px 10px rgba(0,0,0,0.1);
 text-align:center;
 
 }
@@ -118,27 +147,25 @@ font-weight:bold;
 
 }
 
-.boton{
+.producto button{
 
-display:block;
-margin:6px;
 padding:10px;
-border-radius:6px;
-text-decoration:none;
-color:white;
-font-weight:bold;
+margin-top:5px;
+cursor:pointer;
 
 }
 
-.paypal{
+.carrito{
 
-background:#0070ba;
-
-}
-
-.mercadopago{
-
-background:#009ee3;
+position:fixed;
+right:0;
+top:100px;
+background:white;
+width:300px;
+padding:20px;
+box-shadow:-2px 0 10px rgba(0,0,0,0.2);
+height:80%;
+overflow:auto;
 
 }
 
@@ -146,86 +173,50 @@ background:#009ee3;
 
 background:red;
 color:white;
-padding:6px;
-border-radius:6px;
+padding:5px;
+border-radius:5px;
 
 }
 
 const productos=[
 
-{ id:"p1",nombre:"Vardy — Leicester local 2017-2018",talla:"M",precio:949,imagen:"URL_IMAGEN"},
-
-{ id:"p2",nombre:"Messi — Barcelona visitante 2018-2019",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
-
-{ id:"p3",nombre:"Del Piero — Juventus local 2011-2012",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
-
-{ id:"p4",nombre:"Robben — Países Bajos Mundial 2014",talla:"M",precio:999,imagen:"URL_IMAGEN"},
-
-{ id:"p5",nombre:"Mbappé — PSG visitante 2020-2021",talla:"M",precio:1199,imagen:"URL_IMAGEN"},
-
-{ id:"p6",nombre:"Neymar — PSG alternativa 2019-2020",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
-
-{ id:"p7",nombre:"Mitrovic — Fulham local 2019-2020",talla:"M",precio:949,imagen:"URL_IMAGEN"},
-
-{ id:"p8",nombre:"Kroos — Alemania Mundial 2010",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
-
-{ id:"p9",nombre:"Lampard — Chelsea 2010-2011",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
-
-{ id:"p10",nombre:"Kroos — Real Madrid visitante 2018-2019",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
-
-{ id:"p11",nombre:"Pirlo — Italia 2012",talla:"M",precio:1499,imagen:"URL_IMAGEN"},
-
-{ id:"p12",nombre:"Pjanic — Lyon tercera 2010-2011",talla:"M",precio:999,imagen:"URL_IMAGEN"},
-
-{ id:"p13",nombre:"Reus — Dortmund 2012-2013",talla:"L",precio:1099,imagen:"URL_IMAGEN"},
-
-{ id:"p14",nombre:"Lampard — Inglaterra 2012",talla:"XL",precio:1049,imagen:"URL_IMAGEN"},
-
-{ id:"p15",nombre:"Nani — Valencia 2016-2017",talla:"L",precio:949,imagen:"URL_IMAGEN"},
-
-{ id:"p16",nombre:"Beckham — Inglaterra Mundial 2010",talla:"L",precio:1099,imagen:"URL_IMAGEN"},
-
-{ id:"p17",nombre:"Jádson — Corinthians 2017",talla:"L",precio:849,imagen:"URL_IMAGEN"},
-
-{ id:"p18",nombre:"Gerrard — Inglaterra 2008-2010",talla:"2XL",precio:1049,imagen:"URL_IMAGEN"},
-
-{ id:"p19",nombre:"Azpilicueta — Marseille 2011-2012",talla:"M",precio:1049,imagen:"URL_IMAGEN"},
-
-{ id:"p20",nombre:"Krohn-Dehli — Brøndby 2010-2012",talla:"M",precio:849,imagen:"URL_IMAGEN"},
-
-{ id:"p21",nombre:"Duda — Málaga 2008-2009",talla:"L",precio:949,imagen:"URL_IMAGEN"},
-
-{ id:"p22",nombre:"Shevchenko — Ucrania Mundial 2006",talla:"L",precio:2199,imagen:"URL_IMAGEN"},
-
-{ id:"p23",nombre:"Schweinsteiger — Alemania 2015-2016",talla:"M",precio:1049,imagen:"URL_IMAGEN"},
-
-{ id:"p24",nombre:"McKennie — Schalke 2018-2019",talla:"M",precio:999,imagen:"URL_IMAGEN"},
-
-{ id:"p25",nombre:"Fábregas — Chelsea 2015-2016",talla:"L",precio:1149,imagen:"URL_IMAGEN"},
-
-{ id:"p26",nombre:"Xhaka — Suiza 2016",talla:"XL",precio:999,imagen:"URL_IMAGEN"},
-
-{ id:"p27",nombre:"Bale — Gales 2016",talla:"XL",precio:1099,imagen:"URL_IMAGEN"},
-
-{ id:"p28",nombre:"Robben — Bayern 2015-2016",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
-
-{ id:"p29",nombre:"Totti — Roma 2017-2018",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
-
-{ id:"p30",nombre:"Minamino — Japón 2020-2021",talla:"L",precio:1049,imagen:"URL_IMAGEN"},
-
-{ id:"p31",nombre:"Ronaldinho — Barcelona 2006-2008",talla:"L",precio:1599,imagen:"URL_IMAGEN"},
-
-{ id:"p32",nombre:"Gerrard — Liverpool 2011-2012",talla:"M",precio:1299,imagen:"URL_IMAGEN"},
-
-{ id:"p33",nombre:"Salah — Liverpool 2019-2020",talla:"XL",precio:1499,imagen:"URL_IMAGEN"},
-
-{ id:"p34",nombre:"Kroos — Alemania Mundial 2014",talla:"L",precio:1499,imagen:"URL_IMAGEN"},
-
-{ id:"p35",nombre:"Ribéry — Marseille 2006-2007",talla:"M",precio:1299,imagen:"URL_IMAGEN"},
-
-{ id:"p36",nombre:"Rooney — Manchester United 2015-2016",talla:"L",precio:1249,imagen:"URL_IMAGEN"},
-
-{ id:"p37",nombre:"Gerrard — Inglaterra Mundial 2010",talla:"M",precio:1099,imagen:"URL_IMAGEN"}
+{id:"p1",nombre:"Vardy Leicester 2017-2018",talla:"M",precio:949,imagen:"URL_IMAGEN"},
+{id:"p2",nombre:"Messi Barcelona 2018-2019",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
+{id:"p3",nombre:"Del Piero Juventus 2011-2012",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
+{id:"p4",nombre:"Robben Holanda Mundial 2014",talla:"M",precio:999,imagen:"URL_IMAGEN"},
+{id:"p5",nombre:"Mbappe PSG 2020-2021",talla:"M",precio:1199,imagen:"URL_IMAGEN"},
+{id:"p6",nombre:"Neymar PSG 2019-2020",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
+{id:"p7",nombre:"Mitrovic Fulham 2019-2020",talla:"M",precio:949,imagen:"URL_IMAGEN"},
+{id:"p8",nombre:"Kroos Alemania 2010",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
+{id:"p9",nombre:"Lampard Chelsea 2010-2011",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
+{id:"p10",nombre:"Kroos Real Madrid 2018-2019",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
+{id:"p11",nombre:"Pirlo Italia 2012",talla:"M",precio:1499,imagen:"URL_IMAGEN"},
+{id:"p12",nombre:"Pjanic Lyon 2010-2011",talla:"M",precio:999,imagen:"URL_IMAGEN"},
+{id:"p13",nombre:"Reus Dortmund 2012-2013",talla:"L",precio:1099,imagen:"URL_IMAGEN"},
+{id:"p14",nombre:"Lampard Inglaterra 2012",talla:"XL",precio:1049,imagen:"URL_IMAGEN"},
+{id:"p15",nombre:"Nani Valencia 2016-2017",talla:"L",precio:949,imagen:"URL_IMAGEN"},
+{id:"p16",nombre:"Beckham Inglaterra 2010",talla:"L",precio:1099,imagen:"URL_IMAGEN"},
+{id:"p17",nombre:"Jadson Corinthians 2017",talla:"L",precio:849,imagen:"URL_IMAGEN"},
+{id:"p18",nombre:"Gerrard Inglaterra 2008-2010",talla:"2XL",precio:1049,imagen:"URL_IMAGEN"},
+{id:"p19",nombre:"Azpilicueta Marseille 2011-2012",talla:"M",precio:1049,imagen:"URL_IMAGEN"},
+{id:"p20",nombre:"Krohn-Dehli Brondby 2010-2012",talla:"M",precio:849,imagen:"URL_IMAGEN"},
+{id:"p21",nombre:"Duda Malaga 2008-2009",talla:"L",precio:949,imagen:"URL_IMAGEN"},
+{id:"p22",nombre:"Shevchenko Ucrania 2006",talla:"L",precio:2199,imagen:"URL_IMAGEN"},
+{id:"p23",nombre:"Schweinsteiger Alemania 2015",talla:"M",precio:1049,imagen:"URL_IMAGEN"},
+{id:"p24",nombre:"McKennie Schalke 2018-2019",talla:"M",precio:999,imagen:"URL_IMAGEN"},
+{id:"p25",nombre:"Fabregas Chelsea 2015-2016",talla:"L",precio:1149,imagen:"URL_IMAGEN"},
+{id:"p26",nombre:"Xhaka Suiza 2016",talla:"XL",precio:999,imagen:"URL_IMAGEN"},
+{id:"p27",nombre:"Bale Gales 2016",talla:"XL",precio:1099,imagen:"URL_IMAGEN"},
+{id:"p28",nombre:"Robben Bayern 2015-2016",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
+{id:"p29",nombre:"Totti Roma 2017-2018",talla:"M",precio:1149,imagen:"URL_IMAGEN"},
+{id:"p30",nombre:"Minamino Japon 2020-2021",talla:"L",precio:1049,imagen:"URL_IMAGEN"},
+{id:"p31",nombre:"Ronaldinho Barcelona 2006-2008",talla:"L",precio:1599,imagen:"URL_IMAGEN"},
+{id:"p32",nombre:"Gerrard Liverpool 2011-2012",talla:"M",precio:1299,imagen:"URL_IMAGEN"},
+{id:"p33",nombre:"Salah Liverpool 2019-2020",talla:"XL",precio:1499,imagen:"URL_IMAGEN"},
+{id:"p34",nombre:"Kroos Alemania 2014",talla:"L",precio:1499,imagen:"URL_IMAGEN"},
+{id:"p35",nombre:"Ribery Marseille 2006-2007",talla:"M",precio:1299,imagen:"URL_IMAGEN"},
+{id:"p36",nombre:"Rooney Manchester United 2015-2016",talla:"L",precio:1249,imagen:"URL_IMAGEN"},
+{id:"p37",nombre:"Gerrard Inglaterra Mundial 2010",talla:"M",precio:1099,imagen:"URL_IMAGEN"}
 
 ]
 
@@ -235,7 +226,7 @@ productos.forEach(p=>{
 
 catalogo.innerHTML+=`
 
-<div class="producto" id="${p.id}" data-talla="${p.talla}">
+<div class="producto" data-talla="${p.talla}">
 
 <img src="${p.imagen}">
 
@@ -245,17 +236,9 @@ catalogo.innerHTML+=`
 
 <p class="precio">$${p.precio}</p>
 
-<a class="boton paypal"
-href="https://www.paypal.com/paypalme/RodrigoMiguelSalOlv/${p.precio}"
-target="_blank">
-Pagar con PayPal
-</a>
-
-<a class="boton mercadopago"
-href="LINK_MERCADOPAGO"
-target="_blank">
-Pagar con Mercado Pago
-</a>
+<button onclick="agregar('${p.nombre}',${p.precio})">
+Agregar al carrito
+</button>
 
 </div>
 
@@ -263,36 +246,48 @@ Pagar con Mercado Pago
 
 })
 
-document.getElementById("buscar").addEventListener("keyup",function(){
+let carrito=[]
 
-let filtro=this.value.toLowerCase()
+function agregar(nombre,precio){
 
-document.querySelectorAll(".producto").forEach(p=>{
+carrito.push({nombre,precio})
 
-let texto=p.innerText.toLowerCase()
-
-p.style.display=texto.includes(filtro)?"block":"none"
-
-})
-
-})
-
-document.getElementById("filtroTalla").addEventListener("change",function(){
-
-let talla=this.value
-
-document.querySelectorAll(".producto").forEach(p=>{
-
-if(talla=="todas"){
-
-p.style.display="block"
-
-}else{
-
-p.style.display=p.dataset.talla==talla?"block":"none"
+actualizar()
 
 }
 
-})
+function actualizar(){
+
+let lista=document.getElementById("listaCarrito")
+
+lista.innerHTML=""
+
+let total=0
+
+carrito.forEach(p=>{
+
+lista.innerHTML+=`<p>${p.nombre} - $${p.precio}</p>`
+
+total+=p.precio
 
 })
+
+document.getElementById("total").innerText=total
+
+document.getElementById("contador").innerText=carrito.length
+
+}
+
+function pagarPayPal(){
+
+let total=document.getElementById("total").innerText
+
+window.open("https://www.paypal.com/paypalme/RodrigoMiguelSalOlv/"+total)
+
+}
+
+function pagarMP(){
+
+window.open("LINK_MERCADOPAGO")
+
+}
