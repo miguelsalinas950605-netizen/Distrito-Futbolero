@@ -67,372 +67,168 @@ border-radius:5px;
 
 <section class="catalogo">
 
-<div class="producto" id="p1">
-<img src="URL_IMAGEN">
-<h3>Vardy — Leicester local 2017-2018</h3>
-<p>Talla M</p>
-<p class="precio">$949</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p1')">Marcar vendido</button>
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+margin:0;
+}
+
+header{
+background:#111;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.buscador{
+text-align:center;
+margin:20px;
+}
+
+.buscador input{
+padding:10px;
+width:300px;
+border-radius:5px;
+border:1px solid #ccc;
+}
+
+.filtros{
+text-align:center;
+margin-bottom:20px;
+}
+
+.catalogo{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.producto{
+background:white;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+.producto img{
+width:100%;
+border-radius:8px;
+}
+
+.precio{
+font-size:20px;
+font-weight:bold;
+}
+
+.boton{
+display:block;
+margin:6px;
+padding:10px;
+color:white;
+text-decoration:none;
+border-radius:6px;
+}
+
+.paypal{
+background:#0070ba;
+}
+
+.mercadopago{
+background:#009ee3;
+}
+
+.agotado{
+background:red;
+color:white;
+padding:8px;
+border-radius:6px;
+}
+
+</style>
+
+  <div class="buscador">
+
+<input type="text" id="buscar" placeholder="Buscar jugador o equipo">
+
 </div>
 
-<div class="producto" id="p2">
-<img src="URL_IMAGEN">
-<h3>Messi — Barcelona visitante 2018-2019</h3>
-<p>Talla M</p>
-<p class="precio">$1349</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p2')">Marcar vendido</button>
+  <script>
+
+document.getElementById("buscar").addEventListener("keyup",function(){
+
+let filtro=this.value.toLowerCase()
+
+document.querySelectorAll(".producto").forEach(producto=>{
+
+let texto=producto.innerText.toLowerCase()
+
+producto.style.display=texto.includes(filtro)?"block":"none"
+
+})
+
+})
+
+</script>
+
+  <div class="filtros">
+
+<select id="filtroTalla">
+
+<option value="todas">Todas las tallas</option>
+<option value="M">M</option>
+<option value="L">L</option>
+<option value="XL">XL</option>
+<option value="2XL">2XL</option>
+
+</select>
+
 </div>
 
-<div class="producto" id="p3">
-<img src="URL_IMAGEN">
-<h3>Del Piero — Juventus local 2011-2012</h3>
-<p>Talla M</p>
-<p class="precio">$1349</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p3')">Marcar vendido</button>
-</div>
+  <script>
 
-  <div class="producto" id="p4">
-<img src="URL_IMAGEN">
-<h3>Robben — Países Bajos local Mundial 2014</h3>
-<p>Talla M</p>
-<p class="precio">$999</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p4')">Marcar vendido</button>
-</div>
+document.getElementById("filtroTalla").addEventListener("change",function(){
 
-  <div class="producto" id="p5">
-<img src="URL_IMAGEN">
-<h3>Mbappé — PSG visitante 2020-2021</h3>
-<p>Talla M</p>
-<p class="precio">$1199</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p5')">Marcar vendido</button>
-</div>
+let talla=this.value
 
-  <div class="producto" id="p6">
-<img src="URL_IMAGEN">
-<h3>Neymar — PSG alternativa 2019-2020</h3>
-<p>Talla M</p>
-<p class="precio">$1249</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p6')">Marcar vendido</button>
-</div>
+document.querySelectorAll(".producto").forEach(producto=>{
 
-  <div class="producto" id="p7">
-<img src="URL_IMAGEN">
-<h3>Mitrovic — Fulham local 2019-2020</h3>
-<p>Talla M</p>
-<p class="precio">$949</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p7')">Marcar vendido</button>
-</div>
+if(talla=="todas"){
 
-  <div class="producto" id="p8">
-<img src="URL_IMAGEN">
-<h3>Kroos — Alemania local Mundial 2010</h3>
-<p>Talla M</p>
-<p class="precio">$1149</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p8')">Marcar vendido</button>
-</div>
+producto.style.display="block"
 
-  <div class="producto" id="p9">
-<img src="URL_IMAGEN">
-<h3>Lampard — Chelsea local 2010-2011</h3>
-<p>Talla M</p>
-<p class="precio">$1249</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p9')">Marcar vendido</button>
-</div>
+}else{
 
-  <div class="producto" id="p10">
-<img src="URL_IMAGEN">
-<h3>Kroos — Real Madrid visitante 2018-2019</h3>
-<p>Talla M</p>
-<p class="precio">$1249</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p10')">Marcar vendido</button>
-</div>
+producto.style.display=
+producto.dataset.talla==talla?"block":"none"
 
-<div class="producto" id="p11">
-<img src="URL_IMAGEN">
-<h3>Pirlo — Italia local 2012</h3>
-<p>Talla M</p>
-<p class="precio">$1499</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p11')">Marcar vendido</button>
-</div>
+}
 
-<div class="producto" id="p12">
-<img src="URL_IMAGEN">
-<h3>Pjanic — Lyon tercera 2010-2011</h3>
-<p>Talla M</p>
-<p class="precio">$999</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p12')">Marcar vendido</button>
-</div>
+})
 
-<div class="producto" id="p13">
-<img src="URL_IMAGEN">
-<h3>Reus — Borussia Dortmund local 2012-2013</h3>
-<p>Talla L</p>
-<p class="precio">$1099</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p13')">Marcar vendido</button>
-</div>
+})
 
-<div class="producto" id="p14">
-<img src="URL_IMAGEN">
-<h3>Lampard — Inglaterra local 2012-2013</h3>
-<p>Talla XL</p>
-<p class="precio">$1049</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p14')">Marcar vendido</button>
-</div>
+</script>
 
-<div class="producto" id="p15">
-<img src="URL_IMAGEN">
-<h3>Nani — Valencia tercera 2016-2017</h3>
-<p>Talla L</p>
-<p class="precio">$949</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p15')">Marcar vendido</button>
-</div>
+  <script>
 
-<div class="producto" id="p16">
-<img src="URL_IMAGEN">
-<h3>Beckham — Inglaterra local Mundial 2010</h3>
-<p>Talla L</p>
-<p class="precio">$1099</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p16')">Marcar vendido</button>
-</div>
+function vendido(id){
 
-<div class="producto" id="p17">
-<img src="URL_IMAGEN">
-<h3>Jádson — Corinthians visitante 2017</h3>
-<p>Talla L</p>
-<p class="precio">$849</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p17')">Marcar vendido</button>
-</div>
+fetch("https://TU_BASE_FIREBASE/"+id+".json",{
 
-<div class="producto" id="p18">
-<img src="URL_IMAGEN">
-<h3>Gerrard — Inglaterra visitante 2008-2010</h3>
-<p>Talla 2XL</p>
-<p class="precio">$1049</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p18')">Marcar vendido</button>
-</div>
+method:"PUT",
 
-<div class="producto" id="p19">
-<img src="URL_IMAGEN">
-<h3>Azpilicueta — Olympique Marseille tercera 2011-2012</h3>
-<p>Talla M</p>
-<p class="precio">$1049</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p19')">Marcar vendido</button>
-</div>
+body:JSON.stringify({
 
-<div class="producto" id="p20">
-<img src="URL_IMAGEN">
-<h3>Krohn-Dehli — Brøndby local 2010-2012</h3>
-<p>Talla M</p>
-<p class="precio">$849</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p20')">Marcar vendido</button>
-</div>
+vendido:true
 
-  <div class="producto" id="p21">
-<img src="URL_IMAGEN">
-<h3>Duda — Málaga visitante 2008-2009</h3>
-<p>Talla L</p>
-<p class="precio">$949</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p21')">Marcar vendido</button>
-</div>
+})
 
-  <div class="producto" id="p22">
-<img src="URL_IMAGEN">
-<h3>Shevchenko — Ucrania local Mundial 2006</h3>
-<p>Talla L</p>
-<p class="precio">$2199</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p22')">Marcar vendido</button>
-</div>
+})
 
-  <div class="producto" id="p23">
-<img src="URL_IMAGEN">
-<h3>Schweinsteiger — Alemania local 2015-2016</h3>
-<p>Talla M</p>
-<p class="precio">$1049</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p23')">Marcar vendido</button>
-</div>
+}
 
-  <div class="producto" id="p24">
-<img src="URL_IMAGEN">
-<h3>McKennie — Schalke local 2018-2019</h3>
-<p>Talla M</p>
-<p class="precio">$999</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p24')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p25">
-<img src="URL_IMAGEN">
-<h3>Fábregas — Chelsea visitante 2015-2016</h3>
-<p>Talla L</p>
-<p class="precio">$1149</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p25')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p26">
-<img src="URL_IMAGEN">
-<h3>Xhaka — Suiza local 2016</h3>
-<p>Talla XL</p>
-<p class="precio">$999</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p26')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p27">
-<img src="URL_IMAGEN">
-<h3>Bale — Gales local 2016</h3>
-<p>Talla XL</p>
-<p class="precio">$1099</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p27')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p28">
-<img src="URL_IMAGEN">
-<h3>Robben — Bayern local 2015-2016</h3>
-<p>Talla M</p>
-<p class="precio">$1149</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p28')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p29">
-<img src="URL_IMAGEN">
-<h3>Totti — Roma visitante 2017-2018</h3>
-<p>Talla M</p>
-<p class="precio">$1149</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p29')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p29">
-<img src="URL_IMAGEN">
-<h3>Totti — Roma visitante 2017-2018</h3>
-<p>Talla M</p>
-<p class="precio">$1149</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p29')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p31">
-<img src="URL_IMAGEN">
-<h3>Ronaldinho — Barcelona visitante 2006-2008</h3>
-<p>Talla L</p>
-<p class="precio">$1599</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p31')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p32">
-<img src="URL_IMAGEN">
-<h3>Gerrard — Liverpool visitante 2011-2012</h3>
-<p>Talla M</p>
-<p class="precio">$1299</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p32')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p33">
-<img src="URL_IMAGEN">
-<h3>Salah — Liverpool visitante 2019-2020</h3>
-<p>Talla XL</p>
-<p class="precio">$1499</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p33')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p34">
-<img src="URL_IMAGEN">
-<h3>Kroos — Alemania local Mundial 2014</h3>
-<p>Talla L</p>
-<p class="precio">$1499</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p34')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p34">
-<img src="URL_IMAGEN">
-<h3>Kroos — Alemania local Mundial 2014</h3>
-<p>Talla L</p>
-<p class="precio">$1499</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p34')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p36">
-<img src="URL_IMAGEN">
-<h3>Rooney — Manchester United tercera 2015-2016</h3>
-<p>Talla L</p>
-<p class="precio">$1249</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p36')">Marcar vendido</button>
-</div>
-
-  <div class="producto" id="p37">
-<img src="URL_IMAGEN">
-<h3>Gerrard — Inglaterra visitante Mundial 2010</h3>
-<p>Talla M</p>
-<p class="precio">$1099</p>
-<a class="boton paypal" href="PAYPAL_LINK" target="_blank">Pagar con PayPal</a>
-<a class="boton mercadopago" href="MERCADOPAGO_LINK">Pagar con MercadoPago</a>
-<button onclick="marcarVendido('p37')">Marcar vendido</button>
-</div>
+</script>
