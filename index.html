@@ -76,6 +76,70 @@ border-radius:5px;
 <a class="boton" href="https://wa.me/525578494792">Comprar con Yuri</a>
 </div>
 
+   <div class="producto">
+    <img src="https://via.placeholder.com/300" alt="Vardy — Leicester 2017-2018">
+    <h3>Vardy — Leicester 2017-2018</h3>
+    <p>Talla M</p>
+    <p class="precio">$949</p>
+
+    <!-- WhatsApp -->
+    <a class="boton" href="https://wa.me/525513926047">Comprar con Miguel</a>
+    <a class="boton" href="https://wa.me/525578494792">Comprar con Yuri</a>
+
+    <!-- PayPal -->
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="display:inline-block;">
+      <input type="hidden" name="cmd" value="_xclick">
+      <input type="hidden" name="business" value="TU_EMAIL_PAYPAL">
+      <input type="hidden" name="item_name" value="Vardy — Leicester 2017-2018">
+      <input type="hidden" name="amount" value="949.00">
+      <input type="hidden" name="currency_code" value="MXN">
+      <input type="submit" value="Pagar con PayPal" class="boton boton-pago">
+    </form>
+
+    <!-- MercadoPago -->
+    <a href="https://www.mercadopago.com.mx/checkout/v1/redirect?pref_id=TU_PREF_ID" target="_blank" class="boton boton-mp">Pagar con MercadoPago</a>
+
+    <!-- Agregar al carrito -->
+    <button class="boton" onclick="agregarCarrito('Vardy — Leicester 2017-2018', 949)">Agregar al carrito</button>
+  </div>
+
+  <!-- Aquí puedes duplicar el bloque de arriba para cada producto -->
+
+</section>
+
+<!-- Carrito de compras -->
+<div id="carrito">
+  <h3>Mi Carrito</h3>
+</div>
+
+<script>
+let carrito = [];
+
+function agregarCarrito(nombre, precio) {
+  carrito.push({ nombre, precio });
+  mostrarCarrito();
+}
+
+function mostrarCarrito() {
+  let carritoDiv = document.getElementById("carrito");
+  carritoDiv.innerHTML = "<h3>Mi Carrito</h3>";
+  let total = 0;
+  carrito.forEach((item, index) => {
+    total += item.precio;
+    carritoDiv.innerHTML += `<p>${item.nombre} - $${item.precio} <button onclick="eliminar(${index})">❌</button></p>`;
+  });
+  carritoDiv.innerHTML += `<p><strong>Total: $${total}</strong></p>`;
+}
+
+function eliminar(index) {
+  carrito.splice(index, 1);
+  mostrarCarrito();
+}
+</script>
+
+</body>
+</html>
+
 <div class="producto">
 <img src="https://via.placeholder.com/300">
 <h3>Messi — Barcelona visitante 2018-2019</h3>
