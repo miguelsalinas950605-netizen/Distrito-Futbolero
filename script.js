@@ -2,7 +2,7 @@ const productos=[
 
 {id:"p1",nombre:"Vardy Leicester 2017-2018",talla:"M",precio:949,imagen:"URL_IMAGEN"},
 {id:"p2",nombre:"Messi Barcelona 2018-2019",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
-{id:"p3",nombre:"Del Piero Juventus 2011-2012",talla:"M",precio:1349,imagen:"URL_IMAGEN"}
+{id:"p3",nombre:"Del Piero Juventus 2011-2012",talla:"M",precio:1349,imagen:"URL_IMAGEN"},
 {id:"p4",nombre:"Robben Países Bajos Mundial 2014",talla:"M",precio:999,imagen:"URL_IMAGEN"},
 {id:"p5",nombre:"Mbappé PSG visitante 2020-2021",talla:"M",precio:1199,imagen:"URL_IMAGEN"},
 {id:"p6",nombre:"Neymar PSG alternativa 2019-2020",talla:"M",precio:1249,imagen:"URL_IMAGEN"},
